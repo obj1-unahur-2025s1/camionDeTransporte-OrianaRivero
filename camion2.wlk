@@ -1,10 +1,12 @@
-import cosas.*
+import cosas2.*
+
 
 object camion {
     const tara = 1000
     const carga = []
     method cargar(unaCosa){
         carga.add(unaCosa)
+        unaCosa.serCargado()
     }
     method descargar(unaCosa){
         carga.remove(unaCosa)
@@ -45,5 +47,10 @@ object camion {
     method laCargaMasPesada(){
         return
             carga.max({c=>c.peso()})
+    }
+
+    /////////////Parte 2
+    method totalDeBultos(){
+       return carga.sum({c=>c.bultosQueOcupa()})
     }
 }

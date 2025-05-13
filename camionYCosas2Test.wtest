@@ -1,0 +1,71 @@
+import cosas2.*
+import camion2.*
+
+describe "tests de total de bultos"{
+    test "KnightRider, arena a granel y residuos ocupan 3 bultos en total" {
+      camion.cargar(knightRider)
+      camion.cargar(arenaAGranel)
+      camion.cargar(residuosRadioactivos)
+      assert.equals(3, camion.totalDeBultos())
+    }
+    test "Bumblebee y embalaje de seguridad ocupan 4 bultos en total"{
+        camion.cargar(bumblebee)
+        camion.cargar(embalajeDeSeguridad)
+        assert.equals(4, camion.totalDeBultos())
+    }
+    test "Paquete de 15 ladrillos ocupa 1 bulto"{
+        camion.cargar(paqueteDeLadrillos)
+        assert.equals(1, camion.totalDeBultos())
+    }
+    test "Paquete de 200 ladrillos ocupa 2 bultos"{
+        paqueteDeLadrillos.cantidad(200)
+        camion.cargar(paqueteDeLadrillos)
+        assert.equals(2, camion.totalDeBultos())
+    }
+    test "Paquete de 350 ladrillos ocupa 3 bultos"{
+        paqueteDeLadrillos.cantidad(350)
+        camion.cargar(paqueteDeLadrillos)
+        assert.equals(3, camion.totalDeBultos())
+    }
+    test "Bateria antiaerea con misiles ocupa 1 bulto"{
+        camion.cargar(bateriaAntiaerea)
+        assert.equals(1, camion.totalDeBultos())
+    }
+    test "Contenedor portuario con bateria antiaerea y paquete de 350 ladrillos es cargado y ocupa 5 bultos"{
+        paqueteDeLadrillos.cantidad(350)
+        contenedorPortuario.agregar(paqueteDeLadrillos)
+        contenedorPortuario.agregar(bateriaAntiaerea)
+        camion.cargar(contenedorPortuario)
+        assert.equals(5, camion.totalDeBultos())
+    }
+    /////tests de las consecuencias de la carga
+    test "Bumblebee es cargado al camion y se vuelve robot"{
+        camion.cargar(bumblebee)
+        assert.that(bumblebee.transformado() == robot)
+    }
+    test "Un paquete de ladrillos de 30 ladrillos es cargado y se agregan 12 ladrillos"{
+        paqueteDeLadrillos.cantidad(30)
+        camion.cargar(paqueteDeLadrillos)
+        assert.equals(42, paqueteDeLadrillos.cantidad())
+    }
+    test "20 kilos de arena a granel son cargados y pierde 10 kilos"{
+        arenaAGranel.peso(20)
+        camion.cargar(arenaAGranel)
+        assert.equals(10, arenaAGranel.peso())
+    }
+    test "La bateria antiaerea es cargada en el camion y carga misiles"{
+        camion.cargar(bateriaAntiaerea)
+        assert.that(bateriaAntiaerea.tieneMisiles() == true)
+    }
+    test "El contenedor portuario es cargado con la bateria antiaerea y bumblebee"{
+        contenedorPortuario.agregar(bateriaAntiaerea)
+        contenedorPortuario.agregar(bumblebee)
+        camion.cargar(contenedorPortuario)
+        assert.that(bateriaAntiaerea.tieneMisiles() == true)
+        assert.that(bumblebee.transformado() == robot)
+    }
+    test "Los residuos radioactivos son cargados en el camion y agregan 15 kilos"{
+        camion.cargar(residuosRadioactivos)
+        assert.equals(1015, camion.pesoTotal())
+    }
+}

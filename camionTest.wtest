@@ -1,9 +1,31 @@
 import camion.*
+import cosas.*
 
-describe "group of test for camion" {
+describe "el camion cargado de diferentes cosas" {
 
-  test "first test" {
-    assert.that(true)
+  test "el camion está cargado con bumblebee como robot" {
+    camion.cargar(bumblebee)
+    bumblebee.transformar(robot)
+    assert.equals(1800, camion.pesoTotal())
+  }
+
+  test "el camion está cargado con la arena a granel con 150 kilos"{
+    camion.cargar(arenaAGranel)
+    arenaAGranel.peso(150)
+    assert.equals(camion.pesoTotal(), 1150)
+  }
+
+  test "el camion está cargado con la batería aerea, con los misiles puestos"{
+    camion.cargar(bateriaAntiaerea)
+    bateriaAntiaerea.añadirMisiles()
+    assert.equals(camion.pesoTotal(), 1300)
+  }
+
+  test "el camion está cargado con un paquete de 80 ladrillos embalado"{
+    embalajeDeSeguridad.envolver(paqueteDeLadrillos)
+    paqueteDeLadrillos.cantidad(80)
+    camion.cargar(paqueteDeLadrillos)
+    assert.equals(camion.pesoTotal(), 1160)
   }
 
 }
