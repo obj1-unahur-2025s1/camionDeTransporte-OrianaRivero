@@ -51,7 +51,7 @@ object bateriaAntiaerea{
 
 object contenedorPortuario{
     var cosasContenidas = []
-    method peso() = 100 + cosasContenidas.sum()
+    method peso() = 100 + cosasContenidas.sum({c=>c.peso()})
     method elMasPeligroso(){
         return cosasContenidas.max({c=>c.nivelDePeligrosidad()})
     }
@@ -67,6 +67,7 @@ object residuosRadioactivos{
     method peso(nuevo){
         peso = nuevo
     } 
+    method peso() = peso
     method nivelDePeligrosidad() = 200
 }
 
