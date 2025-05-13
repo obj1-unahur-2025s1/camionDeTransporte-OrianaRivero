@@ -39,10 +39,14 @@ object bateriaAntiaerea{
     var tieneMisiles = false
     method tieneMisiles() = tieneMisiles
     //method peso() = if(misiles.isEmpty()) 300 else 200
-    method peso() = if(tieneMisiles == true){ 300} else 200
+    method peso() = if(tieneMisiles == true) 300 else 200
     //method nivelDePeligrosidad() = if(misiles.isEmpty()) 100 else 0
     method nivelDePeligrosidad() = if(self.tieneMisiles() == true) 100 else 0
-    method añadirMisiles() = !tieneMisiles
+    method añadirMisiles() {
+        if(tieneMisiles == false){
+            tieneMisiles = !tieneMisiles
+        }
+    }
 }
 
 object contenedorPortuario{

@@ -15,9 +15,9 @@ describe "el camion cargado de diferentes cosas" {
     assert.equals(camion.pesoTotal(), 1150)
   }
 
-  test "el camion está cargado con la batería aerea, con los misiles puestos"{
-    camion.cargar(bateriaAntiaerea)
+  test "el camion está cargado con la batería antiaerea, con los misiles puestos"{
     bateriaAntiaerea.añadirMisiles()
+    camion.cargar(bateriaAntiaerea)
     assert.equals(camion.pesoTotal(), 1300)
   }
 
